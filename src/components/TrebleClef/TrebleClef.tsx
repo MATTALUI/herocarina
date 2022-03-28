@@ -16,17 +16,19 @@ const TrebleClef: React.FC<TrebleClefProps> = ({
 
   return (
     <div className="cleff-container">
-      <img id="treble" src="/treble.svg" alt="" />
-      {new Array(6).fill(null).map((_, index: number) => (
-        <div
-          key={index}
-          className={classnames(
-            "cleff-sec", location.classes, {
-              note: location.secIndex === index
-            }
-          )}>
-        </div>
-      ))}
+      <div id="cleff">
+        <img id="treble" src="/treble.svg" alt="" />
+        {new Array(6).fill(null).map((_, index: number) => (
+          <div
+            key={index}
+            className={classnames(
+              "cleff-sec", location.classes, {
+                note: location.secIndex === index
+              }
+            )}>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

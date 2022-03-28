@@ -13,7 +13,7 @@ const holesToNoteMap: { [key: string]: Note } = {
   "1:2:3:4:5:9:10": "F4" as Note,
   "1:2:3:4:6:9:10": "F#4" as Note,
   "1:2:3:4:9:10": "G4" as Note,
-  "1:2:4:7:9:10": "G#-" as Note,
+  "1:2:4:7:9:10": "G#4" as Note,
   "1:2:4:9:10": "A4" as Note,
   "1:4:7:9:10": "A#4" as Note,
   "1:4:9:10": "B4" as Note,
@@ -25,6 +25,16 @@ const holesToNoteMap: { [key: string]: Note } = {
   "": "F5" as Note,
 };
 
+const notesToHolesMap: { [key: string]: number[] } = {};
+for (let holeKey in holesToNoteMap) {
+  const note: Note = holesToNoteMap[holeKey];
+  notesToHolesMap[note] = holeKey.split(':')
+    .map((hole: string) => +hole)
+    .filter((hole: number) => !!hole);
+}
+
 export const getNoteFromHoles: (holes: number[]) => Note | null = (holes: number[]): Note | null => {
   return holesToNoteMap[holes.sort((a, b) => a - b).join(':')] || null;
 };
+
+export const getHolesFromNote: (note: Note) => number[] = (note: Note) => notesToHolesMap[note] || [];
